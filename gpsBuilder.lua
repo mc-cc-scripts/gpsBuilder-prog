@@ -6,7 +6,7 @@ local scanner = scm:load("scanner");
 local tC = scm:load("turtleController");
 
 ---@class ScanDataTable
-local points = {
+local buildAtPoints = {
     { x = 2, y = 1, z = 0 },
     { x = -2, y = 1, z = 0 },
     { x = 0, y = 2, z = 2 },
@@ -57,7 +57,7 @@ end
 
 ---comment
 function main()
-    local path = scanner.createPath(points)
+    local path = scanner.createPath(buildAtPoints)
     local drive = tC:findItemInInventory("computercraft:disk_drive")
     local disk = tC:findItemInInventory("computercraft:disk")
     if not drive then
@@ -92,8 +92,7 @@ function main()
             tAttach = function()
                 tC:compactMove("u")
                 turtle.placeDown()
-                tC:compactMove("b")
-                tC:compactMove("d")
+                tC:compactMove("b,d")
             end
         else
             tPlace = turtle.placeUp
@@ -104,8 +103,7 @@ function main()
             tAttach = function()
                 tC:compactMove("d")
                 turtle.placeUp()
-                tC:compactMove("b")
-                tC:compactMove("u")
+                tC:compactMove("b,u")
             end
         end
         tPlace();
